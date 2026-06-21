@@ -92,6 +92,7 @@ Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (
 
 # 4. Diccionario de datos
 
+### 4.1. Dataset usado para entrenar los modelos.
 50.000 filas × 27 columnas, sin nulos ni duplicados.
  
 | Categoría | Columnas | Rango / Valores |
@@ -105,3 +106,7 @@ Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (
 | Salud bucal | `oral`, `dental caries`, `tartar` | `oral`=`Y` constante (se descarta) · caries 0/1 (21%) · tartar Y/N |
 | **Objetivo** | `smoking` | 0/1 |
 
+### 4.2. Archivos generados 
+
+- **`data/processed/X_train.csv` / `X_test.csv`** (40.000 / 10.000 filas × 26 cols): variables numéricas escaladas + `gender_F/M`, `tartar_N/Y` (one-hot). **`y_train.csv` / `y_test.csv`**: columna `smoking`. Generados por `03_preprocesamiento.ipynb`.
+- **`data/processed/smoking_predictions_rf.csv`** y **`smoking_predictions_xgb.csv`** (5.692 filas: `ID` + predicción 0/1) y **`smoking_predictions_comparacion.csv`** (`ID`, ambas predicciones y columna `coinciden`), generados por `05_predicción.ipynb` sobre el dataset de entrega (sin `smoking` real).
