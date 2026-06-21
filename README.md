@@ -116,4 +116,15 @@ Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (
  
 - **Lectura y EDA (`01`–`02`):** dataset sin nulos; se detecta que `oral` es constante (un solo valor) y se descarta. Clases desbalanceadas (63% no fumador / 37% fumador). Hemoglobina y Gtp muestran la mayor separación visual entre clases. Además, en un principio de analizó la existencia de datos duplicados, los cuales se identificaron alrededor de 5000, sin embargo, no se descartaron, ya que se asume que son datos de usuarios distintos y que sus métricas son aproximadas ( por eso la igualdad de métricas antropométricas y médicas). Se mantuvieron la totalidad de los datos.
 - **Preprocesamiento (`03`):** split estratificado 80/20; `OneHotEncoder` y `StandardScaler` ajustados **solo con train** (evita data leakage) y serializados con `joblib` para reutilizarlos tal cual en la predicción.
-- **Entrenamiento y optimización (`04`, x2):** se compararon Random Forest y XGBoost, cada uno en versión base y optimizada con `GridSearchCV` (5-fold, `scoring="f1"`):
+- **Entrenamiento y optimización (`04`, x2):** En un principio de entrenaron tres modelos (Decision Tree, RandomForest y XGBoost), sin embargo, se descartó por un bajo desempeño en las métricas). Por este motivo, solo se compararon Random Forest y XGBoost, cada uno en versión base y optimizada con `GridSearchCV` (5-fold, `scoring="f1"`):
+
+
+| Modelo | Accuracy (test) | F1 — Fumador | Precisión | Recall |
+  |---|---|---|---|---|
+  | Random Forest (base) | 0.76 | 0.69 | 0.65 | 0.73 |
+  | Random Forest optimizado | 0.72 | 0.71 | 0.58 | **0.94** |
+  | XGBoost (base) | 0.77 | 0.69 | 0.68 | 0.70 |
+  | **XGBoost optimizado** | **0.77** | **0.70** | 0.68 | 0.73 |
+
+- **Predicción (`05`):** se aplica el mismo pipeline del notebook `03` al dataset de entrega (5.692 registros sin la columna `smoking`). RF y XGBoost optimizados coinciden en el **79.73%** de las predicciones.
+- **Evaluación final (`06`):** matriz de confusión del XGBoost optimizado sobre el set de test.
