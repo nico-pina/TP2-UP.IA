@@ -110,3 +110,10 @@ Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (
 
 - **`data/processed/X_train.csv` / `X_test.csv`** (40.000 / 10.000 filas × 26 cols): variables numéricas escaladas + `gender_F/M`, `tartar_N/Y` (one-hot). **`y_train.csv` / `y_test.csv`**: columna `smoking`. Generados por `03_preprocesamiento.ipynb`.
 - **`data/processed/smoking_predictions_rf.csv`** y **`smoking_predictions_xgb.csv`** (5.692 filas: `ID` + predicción 0/1) y **`smoking_predictions_comparacion.csv`** (`ID`, ambas predicciones y columna `coinciden`), generados por `05_predicción.ipynb` sobre el dataset de entrega (sin `smoking` real).
+
+
+## 5. Resumen de experimentos, pruebas y cambios realizados
+ 
+- **Lectura y EDA (`01`–`02`):** dataset sin nulos; se detecta que `oral` es constante (un solo valor) y se descarta. Clases desbalanceadas (63% no fumador / 37% fumador). Hemoglobina y Gtp muestran la mayor separación visual entre clases. Además, en un principio de analizó la existencia de datos duplicados, los cuales se identificaron alrededor de 5000, sin embargo, no se descartaron, ya que se asume que son datos de usuarios distintos y que sus métricas son aproximadas ( por eso la igualdad de métricas antropométricas y médicas). Se mantuvieron la totalidad de los datos.
+- **Preprocesamiento (`03`):** split estratificado 80/20; `OneHotEncoder` y `StandardScaler` ajustados **solo con train** (evita data leakage) y serializados con `joblib` para reutilizarlos tal cual en la predicción.
+- **Entrenamiento y optimización (`04`, x2):** se compararon Random Forest y XGBoost, cada uno en versión base y optimizada con `GridSearchCV` (5-fold, `scoring="f1"`):
