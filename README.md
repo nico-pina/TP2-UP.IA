@@ -48,4 +48,8 @@ TP2/
 │   ├── 05_predicción.ipynb                             # Genera las predicciones finales sobre el dataset de entrega
 │   └── 06_Evaluación_de_resultados.ipynb               # Evaluación final del mejor modelo (matriz de confusión)
 │
+├── predictions_cvs/
+│   ├── smoking_predictions_comparacion.csv             # Comparación de las predicciones por XGBoost y Randomforest Optimizados.
+│   ├── smoking_predictions_rf.csv                      # Predicciones del modelo optimizado de Randomforest.
+│   ├── smoking_predictions_xgb.csv                       # Predicciones del modelo optimizado de XGBoost.
 ```
