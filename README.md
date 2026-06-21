@@ -68,6 +68,17 @@ pip install pandas numpy matplotlib seaborn scikit-learn xgboost joblib jupyter
 
 ### 3.3 Orden de ejecución
 Antes de la ejecución de las notebook, asegurarse que las rutas declaradas en el apartado 2 coincidan, en caso contrario, no olviden modificar las rutas relativas a cada archivo que se lee (.csv o .pkl). 
-Los notebooks **deben ejecutarse en este orden**
+Los notebooks **deben ejecutarse en el orden que se detalla a continuación**, ya que cada uno depende de archivos generados por el anterior:
 
+
+| # | Notebook | Genera | Carpeta destino |
+|---|----------|--------|------------------|
+| 1 | `01_lectura_y_discovery.ipynb` | Solo exploración, no genera archivos | — |
+| 2 | `02_eda.ipynb` | Solo gráficos, no genera archivos | — |
+| 3 | `03_preprocesamiento.ipynb` | `X_train.csv`, `X_test.csv`, `y_train.csv`, `y_test.csv` | `data/processed/` |
+| 3 | `03_preprocesamiento.ipynb` | `ohe.pkl`, `scaler.pkl`, `num_cols.pkl`, `cat_cols.pkl`, `feature_columns.pkl` | `models/` |
+| 4a | `04_entrenamiento_y_optimizacion-RandomForest.ipynb` | `smoking_model_forest.pkl`, `smoking_model_forest_best.pkl` | `models/` |
+| 4b | `04_entrenamiento_y_optimizacion-XGboost.ipynb` | `smoking_model_xgb.pkl`, `smoking_model_xgb_best.pkl` | `models/` |
+| 5 | `05_predicción.ipynb` | `smoking_predictions_rf.csv`, `smoking_predictions_xgb.csv`, `smoking_predictions_comparacion.csv` | `data/processed/` |
+| 6 | `06_Evaluación_de_resultados.ipynb` | Matriz de confusión del modelo final (XGBoost optimizado) | — (se muestra en el notebook) |
 
