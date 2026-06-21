@@ -131,9 +131,10 @@ Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (
 
 
 # 6. Conclusiones principales
- 
-Las evaluaciones realizadas muestran que XGBoost optimizado se posiciona como el mejor modelo entre los cuatro comparados (RF base, RF optimizado, XGB base y XGB optimizado). Aunque mantiene el mismo nivel de accuracy que su versión base (0.77), logra un mejor desempeño en la clase 1 (fumador), elevando su F1‑score a 0.70 sin sacrificar de manera significativa la precisión. Esto en contraste con el visto en Random Forest: al optimizarlo mediante GridSearchCV con scoring="f1", el modelo incrementó el recall de la clase 0 (no fumador) , pero a costa de una caída importante en precisión, generando más falsos positivos y reduciendo su accuracy global respecto a la versión base ( de 0.76 a 0.72)  . Este resultado evidencia que optimizar con F1 no garantiza necesariamente un mejor rendimiento general.
+
+ Las evaluaciones realizadas muestran que XGBoost optimizado se posiciona como el mejor modelo entre los cuatro comparados (RF base, RF optimizado, XGB base y XGB optimizado). Aunque mantiene el mismo nivel de accuracy que su versión base (0.77), logra un mejor desempeño en la clase 1 (fumador), elevando su F1‑score a 0.70 sin sacrificar de manera significativa la precisión. Esto en contraste con el visto en Random Forest: al optimizarlo mediante GridSearchCV con scoring="f1", el modelo incrementó el recall de la clase 0 (no fumador) , pero a costa de una caída importante en precisión, generando más falsos positivos y reduciendo su accuracy global respecto a la versión base ( de 0.76 a 0.72)  . Este resultado evidencia que optimizar con F1 no garantiza necesariamente un mejor rendimiento general.
 
 El análisis exploratorio también mostró que variables fisiológicas como hemoglobina y GTP presentan una separación visual clara entre fumadores y no fumadores, lo que coincide con hallazgos clínicos previos y sugiere que estas características aportan buena parte del poder predictivo de los modelos.
 
 Finalmente, al comparar las predicciones de Random Forest y XGBoost sobre el conjunto de entrega, ambos modelos coinciden en aproximadamente el 80% de los casos. El 20% restante corresponde a casos límites, donde los modelos discrepan y donde sería valioso profundizar, por ejemplo, revisando si estos casos coinciden con predicciones de baja confianza o probabilidades cercanas al umbral de decisión.
+
