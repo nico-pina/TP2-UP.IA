@@ -136,5 +136,7 @@ Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (
 
 El análisis exploratorio también mostró que variables fisiológicas como hemoglobina y GTP presentan una separación visual clara entre fumadores y no fumadores, lo que coincide con hallazgos clínicos previos y sugiere que estas características aportan buena parte del poder predictivo de los modelos.
 
+La matriz de confusión del XGBoost optimizado confirma este comportamiento: el modelo acierta más en la clase 0 (no fumadores), pero mantiene un buen equilibrio entre precisión y recall en la clase 1 (fumadores), logrando identificar a la mayoría de los fumadores sin inflar excesivamente los falsos positivos.
+
 Finalmente, al comparar las predicciones de Random Forest y XGBoost sobre el conjunto de entrega, ambos modelos coinciden en aproximadamente el 80% de los casos. El 20% restante corresponde a casos límites, donde los modelos discrepan y donde sería valioso profundizar, por ejemplo, revisando si estos casos coinciden con predicciones de baja confianza o probabilidades cercanas al umbral de decisión.
 
