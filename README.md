@@ -9,7 +9,43 @@ El proyecto se desarrolló principalmente en dos etapas:
 
 1. **Entrenamiento y selección de modelo**, comparando dos modelos de clasificación — **Random Forest** y **XGBoost** — entrenados sobre un dataset con la etiqueta `smoking` conocida, evaluando cada uno en su versión base y en su versión optimizada con `GridSearchCV`.
 2. **Predicción sobre un dataset "de entrega"**, con las mismas columnas pero **sin** la etiqueta `smoking` (5.692 registros), aplicando el pipeline de preprocesamiento ya ajustado (encoder + scaler) y los mejores modelos de Random Forest y XGBoost, comparando además el grado de coincidencia entre ambos.
-3. Finalmente, el modelo seleccionado como predictor fue el XGboost optimizado según las siguientes razones:
 
-   a). Mayor capacidad de generalización. En el proceso de optimziación, XGboost logró "frenar" el overfitting, dejando las métodas de train y test muy cercanas una de la otra (Train:0.79 ; Test:0.7). Esto garantiza que el modelo será estable y confiable cuando reciba datos reales del mundo exterior.
+El modelo final usado para la evaluación de cierre (notebook `06_Evaluación de resultado`) es **XGBoost optimizado**, por ser el que mostró el mejor balance entre exactitud (accuracy) y F1-score sobre la clase minoritaria (fumadores).
+ 
+## 2. Estructura del repositorio
+ 
+El repositorio sigue la organización estándar definida para el proyecto:
 
+```
+TP2/
+│
+├── data/
+│   ├── raw/
+│   │   ├── smoking_prediction.xlsx - smoking_prediction.csv            # Dataset con etiqueta (50.000 filas, 27 cols)
+│   │   └── smoking_prediction_entrega.xlsx - smoking_prediction.csv    # Dataset sin etiqueta a predecir (5.692 filas)
+│   ├── processed/
+│   │   ├── X_train.csv / X_test.csv                   # Features preprocesadas (encoded + escaladas)
+│   │   ├── y_train.csv / y_test.csv                   # Etiquetas de train/test
+│   └── external/                                       # No se utilizaron datos externos en este proyecto.
+├── objetos entrenados/
+│   ├── ohe.pkl                                         # OneHotEncoder ajustado (solo con train)
+│   ├── scaler.pkl                                      # StandardScaler ajustado (solo con train)
+│   ├── num_cols.pkl / cat_cols.pkl                     # Listas de columnas numéricas / categóricas
+│   ├── feature_columns.pkl                             # Orden final de columnas usado en el entrenamiento
+
+├── models/
+│   ├── smoking_model_forest.pkl                        # Random Forest base
+│   ├── smoking_model_forest_best.pkl                   # Random Forest optimizado
+│   ├── smoking_model_xgb.pkl                           # XGBoost base
+│   └── smoking_model_xgb_best.pkl                      # XGBoost optimizado ← modelo final usado en 05 y 06
+│
+├── notebooks/
+│   ├── 01_lectura_y_discovery.ipynb                    # Carga inicial y exploración estructural del dataset
+│   ├── 02_eda.ipynb                                    # Análisis Exploratorio de Datos y visualizaciones
+│   ├── 03_preprocesamiento.ipynb                       # Limpieza, encoding, escalado (feature engineering)
+│   ├── 04_entrenamiento_y_optimizacion-RandomForest.ipynb  # Random Forest + GridSearchCV
+│   ├── 04_entrenamiento_y_optimizacion-XGboost.ipynb       # XGBoost + GridSearchCV
+│   ├── 05_predicción.ipynb                             # Genera las predicciones finales sobre el dataset de entrega
+│   └── 06_Evaluación_de_resultados.ipynb               # Evaluación final del mejor modelo (matriz de confusión)
+│
+```
