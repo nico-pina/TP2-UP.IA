@@ -128,3 +128,14 @@ Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (
 
 - **Predicción (`05`):** se aplica el mismo pipeline del notebook `03` al dataset de entrega (5.692 registros sin la columna `smoking`). RF y XGBoost optimizados coinciden en el **79.73%** de las predicciones.
 - **Evaluación final (`06`):** matriz de confusión del XGBoost optimizado sobre el set de test.
+
+
+# 6. Conclusiones principales
+ 
+1. **XGBoost optimizado fue el mejor modelo** entre los dos evaluados: logra el mismo accuracy (0.77) que su versión base, pero con mejor F1-score en la clase "fumador" (0.70) y sin sacrificar tanto la precisión como ocurrió con Random Forest al optimizar.
+
+2. **Optimizar con `GridSearchCV` y `scoring="f1"` no garantiza un mejor modelo en accuracy global**: en Random Forest, el ajuste favoreció fuertemente el recall de la clase 1 (fumadores) a costa de la precisión, generando un modelo con muchos más falsos positivos y menor accuracy que su versión base.
+
+3. **Variables fisiológicas como hemoglobina y Gtp** muestran separación visual clara entre fumadores y no fumadores en el EDA, consistente con literatura clínica, y probablemente explican buena parte del poder predictivo de los modelos.
+
+4. Random Forest y XGBoost coinciden en aproximadamente **8 de cada 10 predicciones** sobre el dataset de entrega; el 20% restante de discrepancias corresponde a los casos "límite" donde valdría la pena un análisis más fino (por ejemplo, revisar si coinciden con los casos de menor confianza/probabilidad del modelo).
