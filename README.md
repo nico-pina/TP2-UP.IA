@@ -24,32 +24,50 @@ TP2/
 │   │   ├── smoking_prediction.xlsx - smoking_prediction.csv            # Dataset con etiqueta (50.000 filas, 27 cols)
 │   │   └── smoking_prediction_entrega.xlsx - smoking_prediction.csv    # Dataset sin etiqueta a predecir (5.692 filas)
 │   ├── processed/
-│   │   ├── X_train.csv / X_test.csv                   # Features preprocesadas (encoded + escaladas)
-│   │   ├── y_train.csv / y_test.csv                   # Etiquetas de train/test
-│   └── external/                                       # No se utilizaron datos externos en este proyecto.
+│   │   ├── X_train.csv / X_test.csv                            # Features preprocesadas (encoded + escaladas)
+│   │   ├── y_train.csv / y_test.csv                            # Etiquetas de train/test
+│   └── external/                                               # No se utilizaron datos externos en este proyecto.
 ├── objetos entrenados/
-│   ├── ohe.pkl                                         # OneHotEncoder ajustado (solo con train)
-│   ├── scaler.pkl                                      # StandardScaler ajustado (solo con train)
-│   ├── num_cols.pkl / cat_cols.pkl                     # Listas de columnas numéricas / categóricas
-│   ├── feature_columns.pkl                             # Orden final de columnas usado en el entrenamiento
+│   ├── ohe.pkl                                                 # OneHotEncoder ajustado (solo con train)
+│   ├── scaler.pkl                                              # StandardScaler ajustado (solo con train)
+│   ├── num_cols.pkl / cat_cols.pkl                             # Listas de columnas numéricas / categóricas
+│   ├── feature_columns.pkl                                     # Orden final de columnas usado en el entrenamiento
 
 ├── models/
-│   ├── smoking_model_forest.pkl                        # Random Forest base
-│   ├── smoking_model_forest_best.pkl                   # Random Forest optimizado
-│   ├── smoking_model_xgb.pkl                           # XGBoost base
-│   └── smoking_model_xgb_best.pkl                      # XGBoost optimizado ← modelo final usado en 05 y 06
+│   ├── smoking_model_forest.pkl                                # Random Forest base
+│   ├── smoking_model_forest_best.pkl                           # Random Forest optimizado
+│   ├── smoking_model_xgb.pkl                                   # XGBoost base
+│   └── smoking_model_xgb_best.pkl                              # XGBoost optimizado ← modelo final usado en notebooks 05 y 06
 │
 ├── notebooks/
-│   ├── 01_lectura_y_discovery.ipynb                    # Carga inicial y exploración estructural del dataset
-│   ├── 02_eda.ipynb                                    # Análisis Exploratorio de Datos y visualizaciones
-│   ├── 03_preprocesamiento.ipynb                       # Limpieza, encoding, escalado (feature engineering)
-│   ├── 04_entrenamiento_y_optimizacion-RandomForest.ipynb  # Random Forest + GridSearchCV
-│   ├── 04_entrenamiento_y_optimizacion-XGboost.ipynb       # XGBoost + GridSearchCV
-│   ├── 05_predicción.ipynb                             # Genera las predicciones finales sobre el dataset de entrega
-│   └── 06_Evaluación_de_resultados.ipynb               # Evaluación final del mejor modelo (matriz de confusión)
+│   ├── 01_lectura_y_discovery.ipynb                            # Carga inicial y exploración estructural del dataset
+│   ├── 02_eda.ipynb                                            # Análisis Exploratorio de Datos y visualizaciones
+│   ├── 03_preprocesamiento.ipynb                               # Limpieza, encoding, escalado (feature engineering)
+│   ├── 04_entrenamiento_y_optimizacion-RandomForest.ipynb      # Random Forest + GridSearchCV
+│   ├── 04_entrenamiento_y_optimizacion-XGboost.ipynb           # XGBoost + GridSearchCV
+│   ├── 05_predicción.ipynb                                     # Genera las predicciones finales sobre el dataset de entrega
+│   └── 06_Evaluación_de_resultados.ipynb                       # Evaluación final del mejor modelo (matriz de confusión)
 │
 ├── predictions_cvs/
-│   ├── smoking_predictions_comparacion.csv             # Comparación de las predicciones por XGBoost y Randomforest Optimizados.
-│   ├── smoking_predictions_rf.csv                      # Predicciones del modelo optimizado de Randomforest.
-│   ├── smoking_predictions_xgb.csv                       # Predicciones del modelo optimizado de XGBoost.
+│   ├── smoking_predictions_comparacion.csv                     # Comparación de las predicciones por XGBoost y Randomforest Optimizados.
+│   ├── smoking_predictions_rf.csv                              # Predicciones del modelo optimizado de Randomforest.
+│   ├── smoking_predictions_xgb.csv                             # Predicciones del modelo optimizado de XGBoost.
 ```
+
+### 3.2 Crear entorno e instalar dependencias
+ 
+```bash
+# Crear y activar un entorno virtual
+python -m venv venv
+venv\Scripts\activate        # Windows
+source venv/bin/activate     # Linux / Mac
+ 
+# Instalar dependencias
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost joblib jupyter
+```
+
+### 3.3 Orden de ejecución
+Antes de la ejecución de las notebook, asegurarse que las rutas declaradas en el apartado 2 coincidan, en caso contrario, no olviden modificar las rutas relativas a cada archivo que se lee (.csv o .pkl). 
+Los notebooks **deben ejecutarse en este orden**
+
+
