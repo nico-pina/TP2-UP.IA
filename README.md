@@ -53,7 +53,12 @@ TP2/
 │   ├── smoking_predictions_rf.csv                              # Predicciones del modelo optimizado de Randomforest.
 │   ├── smoking_predictions_xgb.csv                             # Predicciones del modelo optimizado de XGBoost.
 ```
-
+## 3. Instrucciones para reproducir el entorno y ejecutar el código
+ 
+### 3.1 Requisitos
+- Python 3.10+ (los notebooks fueron desarrollados en Windows con Anaconda)
+- Jupyter Notebook / JupyterLab
+  
 ### 3.2 Crear entorno e instalar dependencias
  
 ```bash
@@ -79,6 +84,24 @@ Los notebooks **deben ejecutarse en el orden que se detalla a continuación**, y
 | 3 | `03_preprocesamiento.ipynb` | `ohe.pkl`, `scaler.pkl`, `num_cols.pkl`, `cat_cols.pkl`, `feature_columns.pkl` | `models/` |
 | 4a | `04_entrenamiento_y_optimizacion-RandomForest.ipynb` | `smoking_model_forest.pkl`, `smoking_model_forest_best.pkl` | `models/` |
 | 4b | `04_entrenamiento_y_optimizacion-XGboost.ipynb` | `smoking_model_xgb.pkl`, `smoking_model_xgb_best.pkl` | `models/` |
-| 5 | `05_predicción.ipynb` | `smoking_predictions_rf.csv`, `smoking_predictions_xgb.csv`, `smoking_predictions_comparacion.csv` | `data/processed/` |
+| 5 | `05_predicción.ipynb` | `smoking_predictions_rf.csv`, `smoking_predictions_xgb.csv`, `smoking_predictions_comparacion.csv` | `data/predictions_csv/` |
 | 6 | `06_Evaluación_de_resultados.ipynb` | Matriz de confusión del modelo final (XGBoost optimizado) | — (se muestra en el notebook) |
+
+Todas las carpetas detalladas en el apartado 2 deben existir antes de ejecutar (o crearse manualmente), ya que los notebooks no las crean automáticamente.
+
+
+# 4. Diccionario de datos
+
+50.000 filas × 27 columnas, sin nulos ni duplicados.
+ 
+| Categoría | Columnas | Rango / Valores |
+|---|---|---|
+| Identificador | `ID` | 50.000 valores únicos (se descarta del modelado) |
+| Demográficas | `gender`, `age` | F/M · 20–85 años |
+| Antropométricas | `height(cm)`, `weight(kg)`, `waist(cm)` | 130–190 cm · 30–135 kg · 2.1–5.4 |
+| Visión / audición | `eyesight(left/right)`, `hearing(left/right)` | 0–0.38 · 0.04–0.08 |
+| Signos vitales | `systolic`, `relaxation` | 3.0–10.0 · 1.7–6.1 |
+| Bioquímica sanguínea | `fasting blood sugar`, `Cholesterol`, `triglyceride`, `HDL`, `LDL`, `hemoglobin`, `Urine protein`, `serum creatinine`, `AST`, `ALT`, `Gtp` | rangos variables por analito (glicemia, perfil lipídico, función hepática/renal) |
+| Salud bucal | `oral`, `dental caries`, `tartar` | `oral`=`Y` constante (se descarta) · caries 0/1 (21%) · tartar Y/N |
+| **Objetivo** | `smoking` | 0/1 |
 
